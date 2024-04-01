@@ -203,17 +203,17 @@ class GeneralHelper {
       try {
         output['$i']['MemoryType'] = output['$i']['MemoryType'] != null &&
                 output['$i']['MemoryType'].toString().trim().isNotEmpty
-            ? memoryTypes[int.parse(output['$i']['MemoryType'])]
+            ? memoryTypes[int.tryParse(output['$i']['MemoryType']) ?? 0]
             : memoryTypes[0];
         try {
           output['$i']['FormFactor'] =
-              formFactors[int.parse(output['$i']['FormFactor'])];
+              formFactors[int.tryParse(output['$i']['FormFactor']) ?? 0];
         } catch (_) {}
         try {
           output['$i']
               ['SMBIOSMemoryType'] = output['$i']['SMBIOSMemoryType'] != null &&
                   output['$i']['SMBIOSMemoryType'].toString().trim().isNotEmpty
-              ? memoryTypes[int.parse(output['$i']['SMBIOSMemoryType'])]
+              ? memoryTypes[int.tryParse(output['$i']['SMBIOSMemoryType']) ?? 0]
               : memoryTypes[0];
         } catch (_) {}
       } catch (_) {}
@@ -282,8 +282,8 @@ class GeneralHelper {
       formatedData['controllers']['$i']['vendor'] =
           videoControllerData[i]['AdapterCompatibility'];
       formatedData['controllers']['$i']['vram'] =
-          (int.parse(videoControllerData[i]['AdapterRAM'].toString()) / 1024) /
-              1024;
+          ((int.tryParse(videoControllerData[i]['AdapterRAM'].toString()) ?? 0 )
+            / 1024) /1024;
       formatedData['controllers']['$i']['vramDynamic'] =
           videoControllerData[i]['VideoMemoryType'].toString().trim() == '2'
               ? true
